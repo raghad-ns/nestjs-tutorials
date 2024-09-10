@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
+import { AuthDTO } from "src/dto";
 
 // Controller's functionality is to handle requests and responses, and call the service that is responsible to handle the business logic
 // it took the root route /auth
@@ -12,8 +13,8 @@ export class AuthController {
 
     // To create an endpoint /auth/signup
     @Post('signup')
-    signup() {
-        return this.authService.signup()
+    async signup(@Body() dto: AuthDTO) { // DTO: Data Transfer Object
+        return this.authService.signup(dto)
     }
 
     // POST /auth/signin
